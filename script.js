@@ -14,7 +14,7 @@ const questoes = [
     { id: 10, pergunta: 'Em que ano terminou a Segunda Guerra Mundial?', resposta: '1945'},
     { id: 11, pergunta: 'O muro de Berlim foi derrubado em qual ano?', resposta: '1969'},
     { id: 12, pergunta: 'Qual o ano que o Titanic afundou?', resposta: '1912' },
-    { id: 13, pergunta: 'Qual o ano de lançamento do primeiro PlaySations?', resposta: '1994'},
+    { id: 13, pergunta: 'Qual o ano de lançamento do primeiro PlayStation?', resposta: '1994'},
     { id: 14, pergunta: 'Em que ano a Declaração Universal dos Direitos Humanos foi assinada?', resposta: '1948'},
     { id: 15, pergunta: 'Em que ano a World Wide Web (WWW) foi criada por Tim Berners-Lee?', resposta: '1990'},
     { id: 16, pergunta: 'Em que ano o Euro foi introduzido como moeda única na Europa?', resposta: '1999'},
@@ -41,12 +41,24 @@ const questoes = [
 // const nomeJogador = inputDados.question('Digite o seu nome: ');
 
 // Função embaralhar e selecionar questões aleatórias:
-const questoesEmbaralhadas = questoes.sort(() => Math.random() - 0.5);
+function embaralharQuestoes (questoes) {
+    return questoes.sort(() => Math.random() - 0.5);
+}
 
 // Função para selecionar as dez primeiras questões embaralhadas:
-const selecionarDezQuestoes = questoesEmbaralhadas.slice(0, 10);
+function selecionarQuestoesSort(questoes, quantidade) {
+    const selecionarQuestoes = embaralharQuestoes(questoes);
+    return selecionarQuestoes.slice(0, quantidade);
+}
 
 // Função exibir questões embaralhadas:
-const exibirQuestoes = selecionarDezQuestoes.forEach((questao, index) => {
-    console.log(`${index+1} - ${questao.pergunta}`);
-});
+function exibirQuestoes(questoes) {
+    questoes.forEach((questao, index) => {
+        console.log(`${index+1} - ${questao.pergunta}`);
+    });    
+}
+
+const quantidadePerguntas = 10;
+
+const perguntasSelecionadas = selecionarQuestoesSort(questoes, quantidadePerguntas);
+exibirQuestoes(perguntasSelecionadas)
