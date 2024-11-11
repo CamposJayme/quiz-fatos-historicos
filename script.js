@@ -35,7 +35,18 @@ const questoes = [
 ];
 
 // Cabeçalho
-console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
-console.log('Seja bem-vindo jogador(a)!');
+// console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
+// console.log('Seja bem-vindo jogador(a)!');
 
-const nomeJogador = inputDados.question('Digite o seu nome: ');
+// const nomeJogador = inputDados.question('Digite o seu nome: ');
+
+// Função embaralhar e selecionar questões aleatórias:
+const questoesEmbaralhadas = questoes.sort(() => Math.random() - 0.5);
+
+// Função para selecionar as dez primeiras questões embaralhadas:
+const selecionarDezQuestoes = questoesEmbaralhadas.slice(0, 10);
+
+// Função exibir questões embaralhadas:
+const exibirQuestoes = selecionarDezQuestoes.forEach((questao, index) => {
+    console.log(`${index+1} - ${questao.pergunta}`);
+});
