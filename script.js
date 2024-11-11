@@ -1,5 +1,6 @@
 import inputDados from 'readline-sync';
 
+// Constante responsável por armazenar as questões
 const questoes = [
     { id: 1, pergunta: 'Quando aconteceu o atentado as Torres Gêmeas', resposta: '2001'},
     { id: 2, pergunta: 'Em que ano foi detectado o primeiro paciente com coronavírus?', resposta: '2019'},
@@ -33,6 +34,8 @@ const questoes = [
     { id: 30, pergunta: 'Em que ano o homem pisou na Lua pela primeira vez?', resposta: '1969'}
 ];
 
+// Cabeçalho
 console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
+console.log('Seja bem-vindo jogador(a)!');
 
 const nomeJogador = inputDados.question('Digite o seu nome: ');
