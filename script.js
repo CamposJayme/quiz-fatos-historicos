@@ -35,10 +35,12 @@ const questoes = [
 ];
 
 // Cabeçalho
-// console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
-// console.log('Seja bem-vindo jogador(a)!');
+console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
+console.log('Seja bem-vindo jogador(a)!');
 
-// const nomeJogador = inputDados.question('Digite o seu nome: ');
+const nomeJogador = inputDados.question('Digite o seu nome: ');
+console.log("\n");
+
 
 // Função embaralhar e selecionar questões aleatórias:
 function embaralharQuestoes (questoes) {
@@ -61,4 +63,4 @@ function exibirQuestoes(questoes) {
 const quantidadePerguntas = 10;
 
 const perguntasSelecionadas = selecionarQuestoesSort(questoes, quantidadePerguntas);
-exibirQuestoes(perguntasSelecionadas)
+exibirQuestoes(perguntasSelecionadas);
