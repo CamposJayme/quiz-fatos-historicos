@@ -34,58 +34,66 @@ const questoes = [
     { id: 30, pergunta: 'Em que ano o homem pisou na Lua pela primeira vez?', resposta: '1969'}
 ];
 
-// Cabeçalho
-console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
-console.log('Seja bem-vindo jogador(a)!');
 
-const nomeJogador = inputDados.question('Digite o seu nome: ');
-console.log("\n");
-
-
-// Função embaralhar as questões:
-function embaralharQuestoes (questoes) {
-    return questoes.sort(() => Math.random() - 0.5);
+// Função embaralhar as questões e selecionar dez questões de forma aleatória:
+function embaralharEselecionarQuestoes (questoes, quantidadeQuestoes) {
+    const questoesEmbaralhadas = questoes.sort(() => Math.random() - 0.5);
+    return questoesEmbaralhadas.slice(0, quantidadeQuestoes);
 }
 
-// Função para selecionar dez questões aleatória após o embaralhamento:
-function selecionarQuestoesSort(questoes, quantidade) {
-    const selecionarQuestoes = embaralharQuestoes(questoes);
-    return selecionarQuestoes.slice(0, quantidade);
+// Função exibir as questões:
+function exibirQuestoes(pergunta, index) {
+    console.log(`\n${index+1} - ${pergunta.pergunta}`);
+    let resposta = inputDados.question('Digite a resposta (ano): ')
+    return resposta;
 }
 
-// Função exibir questões embaralhadas:
-function exibirQuestoes(questoes) {
-    //Variável responsável por armanezar o total de pontos:
-    let somaPontuação = 0;
+// Função valida resposta:
+function validaRespostaUsuario(resposta, pergunta) {
+    return resposta === pergunta.resposta
+}
 
-    //Looping por todas as questões pedindo a resposta:
-    questoes.forEach((questao, index) => {
-        console.log(`${index+1} - ${questao.pergunta}`);
-        
-        //Validação da resposta inserida pelo usuário:
-        let resposta = inputDados.question('Digite a resposta (ano): ')
-        if(resposta === questao.resposta) { 
-            console.log('Resposta correta!\n');
-            somaPontuação += 1;
+// Função exibir resultado final do jogador:
+function exibirResultado(pontuacaoFinal, nomeJogador) {
+    let mensagem = '';
+
+    //Mensagem personalizada conforme pontuação do jogador:
+    if (pontuacaoFinal <= 3) mensagem = 'OH NÃO! Tente mais uma vez.';
+    if (pontuacaoFinal <= 6) mensagem = 'BOM TRABALHO! Porém, pratique um pouco mais.';
+    if (pontuacaoFinal <= 9) mensagem = 'MUITO BOM! Você acertou a maioria.';
+    if (pontuacaoFinal == 10) mensagem = 'EXCELENTE! Você é um verdadeiro expert.';
+
+    console.log(`\nJogador(a): ${nomeJogador}`);
+    console.log(`Pontuação final: ${pontuacaoFinal}`);    
+    console.log(mensagem);
+}
+
+// Iniciar o quiz e apresentar interface:
+function iniciarQuiz() {
+    // Cabeçalho
+    console.log('-------- QUIZ DE FATOS HISTÓRICOS --------\n');
+    console.log('Seja bem-vindo jogador(a)!');
+
+    const quantidadePerguntas = 10;
+    const nomeJogador = inputDados.question('Digite o seu nome: ');
+    
+    const perguntasSelecionadas = embaralharEselecionarQuestoes(questoes, quantidadePerguntas);
+    let pontuacaoFinal = 0;
+
+    perguntasSelecionadas.forEach((pergunta, index) => {
+        const resposta = exibirQuestoes(pergunta, index);
+        const resultadoQuestao = validaRespostaUsuario(resposta, pergunta);
+
+        if (resultadoQuestao) {
+            console.log('Resposta Correta!');
+            pontuacaoFinal++;
         } else {
-            console.log('Resposta errada!\n');
+            console.log('Resposta Errada!');
         }
     });
 
-    //Resultado final do jogador:
-    console.log(`Jogador(a): ${nomeJogador}`);
-    console.log(`Pontuação final: ${somaPontuação}`);    
-    
-    //Mensagem personalizada conforme pontuação do jogador:
-    if (somaPontuação >= 0 && somaPontuação <= 3) console.log('OH NÃO! Tente mais uma vez.');
-    if (somaPontuação > 3 && somaPontuação <= 6) console.log('BOM TRABALHO! Porém, pratique um pouco mais.');
-    if (somaPontuação > 6 && somaPontuação <= 9) console.log('MUITO BOM! Você acertou a maioria.');
-    if (somaPontuação == 10) console.log('EXCELENTE! Você é um verdadeiro expert.');
+    exibirResultado(pontuacaoFinal, nomeJogador);
+
 }
 
-
-
-const quantidadePerguntas = 10;
-
-const perguntasSelecionadas = selecionarQuestoesSort(questoes, quantidadePerguntas);
-exibirQuestoes(perguntasSelecionadas);
+iniciarQuiz();
