@@ -42,12 +42,12 @@ const nomeJogador = inputDados.question('Digite o seu nome: ');
 console.log("\n");
 
 
-// Função embaralhar e selecionar questões aleatórias:
+// Função embaralhar as questões:
 function embaralharQuestoes (questoes) {
     return questoes.sort(() => Math.random() - 0.5);
 }
 
-// Função para selecionar as dez primeiras questões embaralhadas:
+// Função para selecionar dez questões aleatória após o embaralhamento:
 function selecionarQuestoesSort(questoes, quantidade) {
     const selecionarQuestoes = embaralharQuestoes(questoes);
     return selecionarQuestoes.slice(0, quantidade);
@@ -55,10 +55,35 @@ function selecionarQuestoesSort(questoes, quantidade) {
 
 // Função exibir questões embaralhadas:
 function exibirQuestoes(questoes) {
+    //Variável responsável por armanezar o total de pontos:
+    let somaPontuação = 0;
+
+    //Looping por todas as questões pedindo a resposta:
     questoes.forEach((questao, index) => {
         console.log(`${index+1} - ${questao.pergunta}`);
-    });    
+        
+        //Validação da resposta inserida pelo usuário:
+        let resposta = inputDados.question('Digite a resposta (ano): ')
+        if(resposta === questao.resposta) { 
+            console.log('Resposta correta!\n');
+            somaPontuação += 1;
+        } else {
+            console.log('Resposta errada!\n');
+        }
+    });
+
+    //Resultado final do jogador:
+    console.log(`Jogador(a): ${nomeJogador}`);
+    console.log(`Pontuação final: ${somaPontuação}`);    
+    
+    //Mensagem personalizada conforme pontuação do jogador:
+    if (somaPontuação >= 0 && somaPontuação <= 3) console.log('OH NÃO! Tente mais uma vez.');
+    if (somaPontuação > 3 && somaPontuação <= 6) console.log('BOM TRABALHO! Porém, pratique um pouco mais.');
+    if (somaPontuação > 6 && somaPontuação <= 9) console.log('MUITO BOM! Você acertou a maioria.');
+    if (somaPontuação == 10) console.log('EXCELENTE! Você é um verdadeiro expert.');
 }
+
+
 
 const quantidadePerguntas = 10;
 
