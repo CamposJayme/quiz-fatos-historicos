@@ -58,10 +58,15 @@ function exibirResultado(pontuacaoFinal, nomeJogador) {
     let mensagem = '';
 
     //Mensagem personalizada conforme pontuação do jogador:
-    if (pontuacaoFinal <= 3) mensagem = 'OH NÃO! Tente mais uma vez.';
-    if (pontuacaoFinal <= 6) mensagem = 'BOM TRABALHO! Porém, pratique um pouco mais.';
-    if (pontuacaoFinal <= 9) mensagem = 'MUITO BOM! Você acertou a maioria.';
-    if (pontuacaoFinal == 10) mensagem = 'EXCELENTE! Você é um verdadeiro expert.';
+    if (pontuacaoFinal <= 3) {
+        mensagem = 'OH NÃO! Tente mais uma vez.';
+    } else if (pontuacaoFinal <= 6) {
+        mensagem = 'BOM TRABALHO! Porém, pratique um pouco mais.';
+    } else if (pontuacaoFinal <= 9) {
+        mensagem = 'MUITO BOM! Você acertou a maioria.';
+    } else {
+        mensagem = 'EXCELENTE! Você é um verdadeiro expert.';
+    }
 
     console.log(`\nJogador(a): ${nomeJogador}`);
     console.log(`Pontuação final: ${pontuacaoFinal}`);    
